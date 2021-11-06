@@ -6,7 +6,7 @@ designed to split images that feature several faces into their own unique images
 increased to 4000+ images. The program can be easily modified to run at a higher cycle count, but with the current configuration I was able to get an accuracy result of
 over 90% with the trained model.
 
-# example of cropped sub-images
+# Example of cropped sub-images
 ![alt text](https://raw.githubusercontent.com/jnovak96/MaskDetection/john/charts/Untitled.png)
 
 # Accuracy scores based on class
