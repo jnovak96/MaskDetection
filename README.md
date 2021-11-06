@@ -12,5 +12,5 @@ over 90% with the trained model.
 # Accuracy scores based on class
 ![alt text](https://github.com/jnovak96/MaskDetection/blob/john/charts/accuracy.png?raw=true)
 
-# Traning loss chart based on batch count
+# Traning loss vs. batch count chart
 ![alt text](https://github.com/jnovak96/MaskDetection/blob/john/charts/training_loss.png?raw=true)
