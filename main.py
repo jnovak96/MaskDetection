@@ -40,6 +40,7 @@ class MaskImage:
 
 
 class NeuralNetwork(nn.Module):
+    #NN definition, defining 2 layers of convolution for image processing
     def __init__(self):
         super().__init__()
 
@@ -52,15 +53,11 @@ class NeuralNetwork(nn.Module):
         self.fc2 = nn.Linear(120, 84)
         self.fc3 = nn.Linear(84, 10)
         self.fc4 = nn.Linear(10, 2)
-
+    #definition of steps for the NN
     def forward(self, x):
-        # print(x.shape)
         x = self.pool(functional.relu(self.conv1(x)))
-        # print(x.shape)
         x = self.pool(functional.relu(self.conv2(x)))
-        # print(x.shape)
         x = x.view(-1, 16 * 13 * 13)
-        # print(x.shape)
         x = functional.relu(self.fc1(x))
         x = functional.relu(self.fc2(x))
         x = functional.relu(self.fc3(x))
@@ -150,15 +147,15 @@ def main():
     for annotation in annos:
         all_masks.append(check_annotation(annotation))
 
-
     i = 0
+
     # crop faces from all mask image objects and store as tensor data for processing
 
-
-    # define transform
+    # define transform, apply image normalization and transform image data to tensor data
     transform = transforms.Compose(
         [transforms.ToTensor(),
          transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+    # store 2 class names in array
     classes = ["without_mask", "with_mask"]
     run_preprocessing = False
     columns = []
@@ -222,12 +219,9 @@ def main():
             running_loss = 0.0
             print("epoch {}".format(epoch))
             for i, sample in enumerate(trainloader, 0):
-                # inputs, labels = sample
                 inputs = sample['image']
                 labels = sample['label']
-                # zero the parameter gradients
                 optimizer.zero_grad()
-                # forward + backward + optimize
                 outputs = net(inputs)
                 loss = criterion(outputs, labels)
                 loss.backward()
